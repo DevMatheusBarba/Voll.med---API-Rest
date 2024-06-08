@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${BD_HOST}/voll.med
+    username: ${BD_USER}
+    password: ${BD_PASSWORD}
+
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+hibernate:
+  dialect: org.hibernate.dialect.HSQLDialect
+
+
+
