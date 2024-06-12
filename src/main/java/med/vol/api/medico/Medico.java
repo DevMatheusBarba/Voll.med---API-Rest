@@ -49,9 +49,10 @@ public class Medico {
         } if (dados.endereco() != null){
             this.endereco.atualizarEndereco(dados.endereco());
         }
+
     }
 
     public void excluir() {
-        this.ativo = false;
+        this.ativo = true;
     }
 }
