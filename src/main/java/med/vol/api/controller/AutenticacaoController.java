@@ -4,6 +4,7 @@ package med.vol.api.controller;
 import jakarta.validation.Valid;
 import med.vol.api.domain.usuario.DadosAutenticacao;
 import med.vol.api.domain.usuario.Usuario;
+import med.vol.api.infra.security.DadosToken;
 import med.vol.api.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

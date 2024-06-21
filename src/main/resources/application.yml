@@ -10,18 +10,22 @@ spring:
       hibernate:
         format_sql: true
 
+hibernate:
+  dialect: org.hibernate.dialect.HSQLDialect
 
   spring:
     flyway:
     locations: classpath:db/migration
 
-
-
-hibernate:
-  dialect: org.hibernate.dialect.HSQLDialect
-
 server:
   error:
     include-stacktrace: never
+
+
+api:
+  Security:
+    token:
+      secret: ${JWT_SECRET:123456}
+
 
 
