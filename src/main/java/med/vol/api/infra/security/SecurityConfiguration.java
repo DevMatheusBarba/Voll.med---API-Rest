@@ -1,6 +1,8 @@
 package med.vol.api.infra.security;
 
 
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,21 +14,27 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    @Autowired
+    private SecurityFilter securityFilter;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(csrf -> csrf.disable()) //Desabilitar a proteção contra Cross-site Request Forgery
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //Mudar o tipo de autenticação para Stateless
-                .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/login").permitAll();
-                    req.anyRequest().authenticated();
-                })
-                .build();
+        return
+                http.csrf(csrf -> csrf.disable())
+                        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        .authorizeHttpRequests(req -> {
+                            req.requestMatchers("/login").permitAll();
+                            req.anyRequest().authenticated();
+                        })
+                        .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                        .build();
     }
 
     @Bean

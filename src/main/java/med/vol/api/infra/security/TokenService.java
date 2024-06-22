@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 @Service
 public class TokenService {
 
-    @Value("${api.security.token.secret}")
+    @Value("{api.security.token.secret}")
     private String secret;
 
     public String gerarToken(Usuario usuario) {
@@ -34,7 +34,7 @@ public class TokenService {
         try {
             var algoritimo = Algorithm.HMAC256(secret);
             return JWT.require(algoritimo)
-                    .withIssuer("API Voll.med")
+                    .withIssuer("API Voll.med") //Verificar também se os dado batem ná hora de descodificar
                     .build()
                     .verify(tokenJWT)
                     .getSubject();
@@ -46,6 +46,5 @@ public class TokenService {
 
     private Instant dataExpiracao() {
         return Instant.now().plus(2, ChronoUnit.HOURS);
-
     }
 }
