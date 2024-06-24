@@ -3,8 +3,6 @@ package med.vol.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.vol.api.domain.medico.DadosDetalhamentoMedico;
-import med.vol.api.domain.medico.DadosListagemMedicos;
 import med.vol.api.domain.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/paciente")
+@RequestMapping("/pacientes")
 public class PacienteController {
 
     @Autowired
@@ -29,25 +27,35 @@ public class PacienteController {
 
         var uri = uriComponentsBuilder.path("/paciente/{id}").buildAndExpand(paciente.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new DetalhamentoPaciente(paciente));
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoPaciente(paciente));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity detalhamentoPaciente(@PathVariable Long id) {
         var paciente = repository.getReferenceById(id);
-        return ResponseEntity.ok(new DetalhamentoPaciente(paciente));
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
     }
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemPaciente>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
-        var page = repository.findAll(paginacao).map(DadosListagemPaciente::new);
+        var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
         return ResponseEntity.ok(page);
     }
     
-    @PutMapping
+    @PutMapping()
     @Transactional
     public ResponseEntity atualizaPaciente(@RequestBody @Valid DadosAtualizacaoPaciente dados){
+        var paciente = repository.getReferenceById(dados.id());
+        paciente.atualizaDados(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+    }
 
+    @DeleteMapping("{id}")
+    @Transactional
+    public ResponseEntity desativaPaciente (@PathVariable Long id){
+        var paciente = repository.getReferenceById(id);
+        paciente.desativaPaciente();
+        return ResponseEntity.noContent().build();
     }
 
 

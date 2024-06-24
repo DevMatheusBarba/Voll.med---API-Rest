@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import med.vol.api.domain.endereco.Endereco;
 
 @Entity
-@Table(name = "paciente")
+@Table(name = "pacientes")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -36,5 +36,21 @@ public class Paciente {
         this.telefone = dados.telefone();
         this.endereco = new Endereco(dados.endereco());
         this.ativo = true;
+    }
+
+    public void atualizaDados(DadosAtualizacaoPaciente dados) {
+        if (dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if (dados.telefone() != null){
+            this.telefone = dados.telefone();
+        }
+        if (dados.endereco() != null){
+            this.endereco.atualizarEndereco(dados.endereco());
+        }
+    }
+
+    public void desativaPaciente() {
+        this.ativo = false;
     }
 }
