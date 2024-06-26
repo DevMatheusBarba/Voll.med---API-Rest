@@ -16,7 +16,7 @@ public class ValidadeoHorarioFuncionamento implements ValidadorAgendamentoConsul
 
 
         var domingo = dataConsulta.getDayOfWeek().equals(DayOfWeek.SUNDAY); //Verificar se o dia da semana é Domingo
-        var antesDaAbertura = dataConsulta.getHour() > 7;  //Verificar o horário que está vindo no DTO
+        var antesDaAbertura = dataConsulta.getHour() < 7;  //Verificar o horário que está vindo no DTO
         var depoisDoEncerramento = dataConsulta.getHour() > 18;  //Verificar o horário que está vindo no DTO
 
 

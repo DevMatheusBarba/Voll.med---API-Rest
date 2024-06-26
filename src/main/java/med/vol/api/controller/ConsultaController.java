@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 import med.vol.api.domain.consultas.AgendaDeConsultas;
 import med.vol.api.domain.consultas.DadosAgendamentoConsulta;
 import med.vol.api.domain.consultas.DadosCancelamentoConsulta;
-import med.vol.api.domain.consultas.DadosDetalhamentoConsulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,17 +20,19 @@ public class ConsultaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity agendar(@RequestBody @Valid DadosAgendamentoConsulta dados) {
-        agenda.agendar(dados);
-        return ResponseEntity.ok(new DadosDetalhamentoConsulta(null, null, null, null));
+    public ResponseEntity agendar (@RequestBody @Valid DadosAgendamentoConsulta dados) {
+        var dto = agenda.agendar(dados);
+        return ResponseEntity.ok(dto);
     }
 
-    @DeleteMapping
+    @DeleteMapping()
     @Transactional
-    public ResponseEntity cancelar(@RequestBody @Valid DadosCancelamentoConsulta dados) {
+    public void cancelamento(@RequestBody @Valid DadosCancelamentoConsulta dados ){
         agenda.cancelar(dados);
-        return ResponseEntity.noContent().build();
+
+
     }
+
 
 }
 
