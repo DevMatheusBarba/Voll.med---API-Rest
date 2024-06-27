@@ -1,4 +1,4 @@
-package med.vol.api.domain.consultas.validacoes;
+package med.vol.api.domain.consultas.cancelamento;
 
 import med.vol.api.domain.ValidacaoException;
 import med.vol.api.domain.consultas.ConsultaRepository;
@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Component
-public class ValidadorHorarioAntecedencia implements ValidadorCancelamentoDeConsulta{
+public class ValidadorHorarioAntecedencia implements ValidadorCancelamentoDeConsulta {
 
    @Autowired
    private ConsultaRepository repository;

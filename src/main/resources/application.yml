@@ -27,4 +27,3 @@ api:
     token:
       secret: ${JWT_SECRET:123456}
 
-
