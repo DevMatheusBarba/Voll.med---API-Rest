@@ -1,7 +1,5 @@
 package med.vol.api.controller;
 
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotNull;
 import med.vol.api.domain.consultas.AgendaDeConsultas;
 import med.vol.api.domain.consultas.DadosAgendamentoConsulta;
 import med.vol.api.domain.consultas.DadosDetalhamentoConsulta;
@@ -11,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.webservices.server.AutoConfigureMockWebServiceClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
