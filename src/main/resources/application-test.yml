@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${BD_HOST}/voll.med_test
+
+
