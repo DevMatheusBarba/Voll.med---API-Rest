@@ -28,7 +28,7 @@ API permite o cadastro e gerenciamento de médicos, pacientes e consultas médic
 - [Uso](#uso)
 - [Contato](#contato)
 
-## Instalação
+# Instalação
 ### Requisitos
 - [Java JDK 21](https://www.oracle.com/br/java/technologies/downloads/#jdk21-windows)
 - [PostgreSQL](https://www.postgresql.org/download/)
@@ -150,6 +150,11 @@ API permite o cadastro e gerenciamento de médicos, pacientes e consultas médic
 # Contato
 
 Para mais informações, entre em contato pelo email: matheus.silva081@icloud.com
+
+
+## Licença
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
+
 
 
 
